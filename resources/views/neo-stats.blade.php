@@ -9,7 +9,6 @@
 		@csrf
 		<div class="container px-4">
 			<div class="grid grid-cols-3 gap-4 mb-4">
-				<!-- Start Date -->
 				<div class="w-full">
 					<label for="start_date" class="block font-medium">Start Date</label>
 					<input type="date" id="start_date" name="start_date" class="w-full p-2 border rounded"
@@ -19,7 +18,6 @@
 					@endif
 				</div>
 
-				<!-- End Date -->
 				<div class="w-full">
 					<label for="end_date" class="block font-medium">End Date</label>
 					<input type="date" id="end_date" name="end_date" class="w-full p-2 border rounded"
@@ -29,11 +27,8 @@
 					@endif
 				</div>
 
-				<!-- Submit Button -->
 				<div class="w-full flex items-end gap-4">
 					<button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Submit</button>
-
-					<!-- Clear Button -->
 					<button type="button" class="bg-red-500 text-white px-4 py-2 rounded w-full"
 						onclick="clearFilters()">Clear</button>
 				</div>
@@ -70,11 +65,8 @@
 
 	<script>
 		function clearFilters() {
-			// Reset date picker values
 			document.getElementById('start_date').value = '';
 			document.getElementById('end_date').value = '';
-
-			// Redirect to home page
 			window.location.href = '/';
 		}
 

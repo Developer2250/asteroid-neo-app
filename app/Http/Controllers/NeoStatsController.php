@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Jobs\FetchNeoDataJob;
-use Illuminate\Support\Facades\Http;
 use App\Http\Requests\NeoStatsRequest;
 
 class NeoStatsController extends Controller

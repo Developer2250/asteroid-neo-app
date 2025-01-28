@@ -36,6 +36,11 @@ class FetchNeoDataJob
         }
     }
 
+    /**
+     * Get the processed NEO data.
+     *
+     * @return array|null Processed NEO data or null if fetching failed
+     */
     public function getData()
     {
         return $this->data;
@@ -51,10 +56,17 @@ class FetchNeoDataJob
             'id' => null,
             'distance' => PHP_INT_MAX,
         ];
+
+        // Accumulates the sizes of all asteroids
         $totalSize = 0;
+
+        // Count  the total number of asteroids
         $totalAsteroids = 0;
+
+        // Count the number of asteroids for each day
         $dailyCounts = [];
 
+        // Process each day's data
         foreach ($data['near_earth_objects'] as $date => $asteroids) {
             $dailyCounts[$date] = count($asteroids);
             foreach ($asteroids as $asteroid) {
@@ -66,6 +78,8 @@ class FetchNeoDataJob
                 $totalSize += $size;
                 $totalAsteroids++;
 
+
+                // Update fastest asteroid if this one is faster
                 if ($speed > $fastestAsteroid['speed']) {
                     $fastestAsteroid = [
                         'id' => $asteroid['id'],
@@ -73,6 +87,7 @@ class FetchNeoDataJob
                     ];
                 }
 
+                // Update closest asteroid if this one is closer
                 if ($distance < $closestAsteroid['distance']) {
                     $closestAsteroid = [
                         'id' => $asteroid['id'],
@@ -82,6 +97,7 @@ class FetchNeoDataJob
             }
         }
 
+        // Calculate the average size of all asteroids
         $averageSize = $totalAsteroids > 0 ? $totalSize / $totalAsteroids : 0;
 
         return [
